@@ -17,8 +17,8 @@ my_dict['list'].append('60')
 my_dict['list'].pop(1)
 
 # my_dict['dict'] = {'two': 'February', 'three': 'March',
-#                   'four': 'April', 'five': 'May', 'I am a tuple': 'value6'}
-my_dict['dict']['I am a tuple'] = 'value6'
+#                   'four': 'April', 'five': 'May', ('I am a tuple',): 'value6'}
+my_dict['dict'][('I am a tuple',)] = 'value6'
 my_dict['dict'].pop('one')
 
 # my_dict['set'] = {100, 200, 300, 400, 500, 600}
