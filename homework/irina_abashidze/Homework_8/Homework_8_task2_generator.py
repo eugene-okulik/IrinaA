@@ -53,6 +53,7 @@ print("Двухсотое число Фибоначчи:", two_hundredth_number)
 print("Тысячное число Фибоначчи:", thousandth_number)
 print("Сто тысячное число Фибоначчи:", hundred_thousandth_number)
 
+
 # Способ 3
 def fibonacci_generator():
     a, b = 0, 1
