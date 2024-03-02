@@ -20,11 +20,12 @@ for line in lines:
 
     # Оставшаяся часть строки
     action_str = rest_of_line.strip()
+    # print(action_str)
 
     # Извлечение даты
     action_date_str = action_str.split()[0]
-    action_date = datetime.datetime.strptime(action_date_str, "%Y-%m-%d")
-
+    action_date = datetime.datetime.strptime(action_str, "%Y-%m-%d %H:%M:%S.%f")
+    action_date_new = datetime.datetime.strptime(action_date_str, "%Y-%m-%d")
     # Выполнение соответствующего действия в зависимости от номера
     if number == 1:
         # Действие для номера 1: распечатать дату, но на неделю позже
@@ -38,5 +39,5 @@ for line in lines:
     elif number == 3:
         # Действие для номера 3: распечатать сколько дней назад была эта дата
         today = datetime.datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
-        days_ago = (today - action_date).days
+        days_ago = (today - action_date_new).days
         print(days_ago)
