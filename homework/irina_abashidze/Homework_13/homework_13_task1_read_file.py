@@ -4,10 +4,13 @@ import os
 
 # Определение пути к файлу
 base_path = os.path.dirname(__file__)
-file_path = os.path.join(base_path, "C:\\Users\\Ирина\\IrinaA\\homework\\eugene_okulik\\hw_13\\data.txt")
+homework_path = os.path.dirname(os.path.dirname(base_path))
+print(homework_path)
+eugene_file_path = os.path.join(homework_path, 'eugene_okulik', 'hw_13', 'data.txt')
+print(eugene_file_path)
 
 # Чтение файла и обработка строк
-with open(file_path, "r") as file:
+with open(eugene_file_path, "r") as file:
     lines = file.readlines()
 
 for line in lines:
