@@ -1,0 +1,31 @@
+INSERT INTO `groups` (title, start_date, end_date) VALUES ('Python Test Automation', 'feb 2024', 'jun 2024')
+INSERT INTO students (name, second_name, group_id) VALUES ('Irina', 'Abashidze', 338)
+INSERT INTO books (title, taken_by_student_id) VALUES ('Python for everybody', 342)
+INSERT INTO books (title, taken_by_student_id) VALUES ('Learning SQL', 342)
+INSERT INTO subjets  (title) VALUES ('Python Basics')
+INSERT INTO subjets  (title) VALUES ('SQL Quick Start')
+INSERT INTO lessons  (title, subject_id) VALUES ('Lesson 1 Introduction to Python', 432)
+INSERT INTO lessons  (title, subject_id) VALUES ('Lesson 2 Variables in Python', 432)
+INSERT INTO lessons  (title, subject_id) VALUES ('Lesson 1 SQL Tables and Keys', 433)
+INSERT INTO lessons  (title, subject_id) VALUES ('Lesson 2 SQL Basic Queries', 433)
+INSERT INTO marks  (value, lesson_id, student_id) VALUES (8, 403, 342)
+INSERT INTO marks  (value, lesson_id, student_id) VALUES (9, 404, 342)
+INSERT INTO marks  (value, lesson_id, student_id) VALUES (10, 405, 342)
+INSERT INTO marks  (value, lesson_id, student_id) VALUES (11, 406, 342)
+
+SELECT value FROM marks WHERE student_id = 342
+SELECT title FROM books WHERE taken_by_student_id = 342
+
+SELECT s.title,l.title, m.value, b.title, g.title
+FROM subjets s  JOIN lessons l 
+ON l.subject_id = s.id
+JOIN marks m 
+ON l.id = m.lesson_id
+JOIN books b 
+ON m.student_id = b.taken_by_student_id
+JOIN students s2 
+ON m.student_id = s2.id
+JOIN `groups` g 
+ON s2.group_id = g.id 
+WHERE m.lesson_id in (403, 404) and b.id = 484
+or m.lesson_id in (405, 406) and b.id = 485
