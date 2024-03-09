@@ -18,8 +18,8 @@ db_name = os.getenv("DB_NAME")
 # Определение пути к файлу
 base_path = os.path.dirname(__file__)
 homework_path = os.path.dirname(os.path.dirname(base_path))
-eugene_file_path = os.path.join(homework_path, 'eugene_okulik', 'Lesson_16', 'hw_data', 'data.csv')
-
+eugene_file_path = os.path.join(homework_path, 'eugene_okulik', 'Lesson_16', 'data.csv')
+print(eugene_file_path)
 # Подключение к базе данных
 db = mysql.connect(
     user=db_user,
