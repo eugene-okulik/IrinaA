@@ -132,7 +132,9 @@ db.close()
 #         # Сравнение данных
 #         for i, value in enumerate(result):
 #             if str(value) != row[list(row.keys())[i]]:
-#                 print(f"Несоответствие данных для {name} {second_name}: {list(row.keys())[i]} - ожидаемое: {row[list(row.keys())[i]]}, фактическое: {value}")
+#                 print(f"Несоответствие данных для {name} {second_name}:
+#                 {list(row.keys())[i]} - ожидаемое: {row[list(row.keys())[i]]},
+#                 фактическое: {value}")
 
 # Закрытие соединения с базой данных
 # cursor.close()
