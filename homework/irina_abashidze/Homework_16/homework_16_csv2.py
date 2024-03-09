@@ -90,9 +90,9 @@ for row in csv_data:
     if not result_marks:
         print(f"Данных для {mark_value} в таблице marks нет в базе данных")
 
-# # Закрытие соединения с базой данных
-# cursor.close()
-# db.close()
+# Закрытие соединения с базой данных
+cursor.close()
+db.close()
 
 # # Чтение данных из CSV-файла
 # with open(eugene_file_path, 'r') as file:
@@ -135,5 +135,5 @@ for row in csv_data:
 #                 print(f"Несоответствие данных для {name} {second_name}: {list(row.keys())[i]} - ожидаемое: {row[list(row.keys())[i]]}, фактическое: {value}")
 
 # Закрытие соединения с базой данных
-cursor.close()
-db.close()
+# cursor.close()
+# db.close()

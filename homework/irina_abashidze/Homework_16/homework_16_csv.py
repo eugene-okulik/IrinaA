@@ -4,7 +4,6 @@ import csv
 from dotenv import load_dotenv
 import mysql.connector as mysql
 
-
 # Загрузка переменных окружения из файла .env
 load_dotenv()
 
