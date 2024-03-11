@@ -1,7 +1,7 @@
 import os
 import argparse
 from datetime import datetime
-from colorama import Fore, Style  # Импорт библиотеки для раскраски текста в консоли
+from colorama import Fore, Style
 
 
 # Функция для обработки блока лога
@@ -66,7 +66,16 @@ def print_results(results, full_output=False):
     if results:
         print("Результаты поиска:")
         for result in results:
-            print(f"Файл: {result['file']}, Строка: {result['line_number']}, Текст: {result['text'][:300]}")
+            start_index = max(result['text'].find(search_text) - 150, 0)  # Начало вывода 150 симв до найденного текста
+            end_index = min(result['text'].find(search_text) + 150, len(result['text']))  # Конец вывода 150 симв после
+            highlighted_text = (
+                    result['text'][:start_index]
+                    + Fore.RED + result['text'][
+                                 start_index:end_index] + Style.RESET_ALL  # Выделение найден текста красным
+                    + result['text'][end_index:]
+            )
+            print(f"Файл: {Fore.BLUE}{result['file']}{Style.RESET_ALL}, Строка: {Fore.GREEN}{result['line_number']}"
+                  f"{Style.RESET_ALL}, Текст: {highlighted_text}")
             if full_output:
                 print(result['text'])
             print()
@@ -91,7 +100,6 @@ if __name__ == "__main__":
     parser.add_argument("--full_output", action="store_true", help="Вывести полный текст найденных блоков логов")
     args = parser.parse_args()
 
-    # Извлечение аргументов
     log_folder = args.log_folder
     search_text = args.text
     start_date = datetime.strptime(args.start_date, "%Y-%m-%d %H:%M:%S.%f") if args.start_date else None
@@ -99,10 +107,8 @@ if __name__ == "__main__":
     unwanted_text = args.unwanted_text
     full_output = args.full_output
 
-    # Проверка существования указанной директории
     if not os.path.exists(log_folder):
         print("Указанный путь не существует.")
     else:
-        # Выполнение поиска и вывод результатов
         results = search_logs(log_folder, search_text, start_date, end_date, unwanted_text)
         print_results(results, full_output)
