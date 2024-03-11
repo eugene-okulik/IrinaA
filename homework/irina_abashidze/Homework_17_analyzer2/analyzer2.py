@@ -1,7 +1,6 @@
 import os
 import argparse
 from datetime import datetime
-from colorama import Fore, Style  # Импорт библиотеки для раскраски текста в консоли
 
 
 # Функция для обработки блока лога
