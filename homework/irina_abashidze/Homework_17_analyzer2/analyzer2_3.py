@@ -100,9 +100,12 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Logs Analyzer 2")
     parser.add_argument("log_folder", type=str, help="Путь к папке с логами")
     parser.add_argument("--text", type=str, default=None, help="Текст для поиска")
-    parser.add_argument("--start_date", type=str, default=None, help="Дата начала поиска в формате 'YYYY-MM-DD HH:MM:SS.SSS'")
-    parser.add_argument("--end_date", type=str, default=None, help="Дата окончания поиска в формате 'YYYY-MM-DD HH:MM:SS.SSS'")
-    parser.add_argument("--unwanted_text", type=str, default=None, help="Текст, который надо исключить из результатов поиска")
+    parser.add_argument("--start_date", type=str, default=None,
+                        help="Дата начала поиска в формате 'YYYY-MM-DD HH:MM:SS.SSS'")
+    parser.add_argument("--end_date", type=str, default=None,
+                        help="Дата окончания поиска в формате 'YYYY-MM-DD HH:MM:SS.SSS'")
+    parser.add_argument("--unwanted_text", type=str, default=None,
+                        help="Текст, который надо исключить из результатов поиска")
     parser.add_argument("--full_output", action="store_true", help="Вывести полный текст найденных блоков логов")
     args = parser.parse_args()
 
