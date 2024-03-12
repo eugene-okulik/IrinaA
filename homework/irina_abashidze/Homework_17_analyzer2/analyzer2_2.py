@@ -70,8 +70,10 @@ def print_results(results, full_output=False):
             end_index = min(result['text'].find(search_text) + 150, len(result['text']))  # Конец вывода 150 симв после
             highlighted_text = (
                     result['text'][:start_index]
-                    + Fore.RED + result['text'][
-                                 start_index:end_index] + Style.RESET_ALL  # Выделение найден текста красным
+                    + Fore.RED
+                    + result['text']
+            [start_index:end_index]
+                    + Style.RESET_ALL  # Выделение найденного текста красным
                     + result['text'][end_index:]
             )
             print(f"Файл: {Fore.BLUE}{result['file']}{Style.RESET_ALL}, Строка: {Fore.GREEN}{result['line_number']}"
