@@ -72,7 +72,7 @@ def print_results(results, full_output=False):
                 result['text'][:start_index]
                 + Fore.RED
                 + result['text']
-            [start_index:end_index]
+                [start_index:end_index]
                 + Style.RESET_ALL  # Выделение найденного текста красным
                 + result['text'][end_index:]
             )
