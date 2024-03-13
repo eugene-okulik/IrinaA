@@ -45,6 +45,7 @@ def search_logs(log_folder, search_text, start_date, end_date, unwanted_text):
     for root, dirs, files in os.walk(log_folder):
         for file in files:
             file_path = os.path.join(root, file)
+            print(f"Обрабатываем файл: {file_path}")
             with open(file_path, 'r', encoding='utf-8', errors='ignore') as f:
                 lines = f.readlines()
                 current_block = []  # Хранит текущий блок лога
