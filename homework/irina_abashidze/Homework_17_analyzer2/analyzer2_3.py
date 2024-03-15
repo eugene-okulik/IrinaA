@@ -5,11 +5,14 @@ from colorama import Fore, Style
 
 
 def process_log_block(file_path, block, results, search_text, start_date, end_date, unwanted_text):
-    timestamp_str = block[0].split()[0]  # Извлекаем временную метку из первой строки блока
+    timestamp_str = block[0]  # Получаем всю строку с временной меткой
     try:
+        # Извлекаем только часть строки с датой и временем (первые 23 символа)
+        timestamp_str = timestamp_str[:23]
         timestamp = datetime.strptime(timestamp_str, "%Y-%m-%d %H:%M:%S.%f")
     except ValueError:
         # Пропускаем блок, если не удалось распознать временную метку
+        print(f"Ошибка при обработке временной метки в блоке: {timestamp_str}")
         return
 
     # Проверяем соответствие времени блока заданным критериям
@@ -111,14 +114,29 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     log_folder = args.log_folder
-    search_text = args.text  # Присвоение значения аргумента --text
-    start_date = datetime.strptime(args.start_date, "%Y-%m-%d %H:%M:%S.%f") if args.start_date else None
-    end_date = datetime.strptime(args.end_date, "%Y-%m-%d %H:%M:%S.%f") if args.end_date else None
-    unwanted_text = args.unwanted_text
-    full_output = args.full_output
+
+    if args.start_date is not None:
+        start_date = datetime.strptime(args.start_date, "%Y-%m-%d")
+    else:
+        start_date = None
+
+    if args.end_date is not None:
+        end_date = datetime.strptime(args.end_date, "%Y-%m-%d")
+    else:
+        end_date = None
+
+    if args.text is not None:
+        search_text = args.text
+    else:
+        search_text = None
+
+    if args.unwanted_text is not None:
+        unwanted_text = args.unwanted_text
+    else:
+        unwanted_text = None
 
     if not os.path.exists(log_folder):
-        print("Указанный путь не существует.")
+        print("The specified path does not exist.")
     else:
         results = search_logs(log_folder, search_text, start_date, end_date, unwanted_text)
-        print_results(results, full_output)
+        print_results(results, args.full_output)
