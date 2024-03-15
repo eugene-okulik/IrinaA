@@ -21,7 +21,6 @@ def process_log_block(file_path, block, results, search_text, start_date, end_da
     # Объединяем строки блока в одну для поиска текста целиком
     block_text = ''.join(block)
 
-
     # Поиск текста в блоке (без учета регистра символов и лишних пробелов)
     if search_text and search_text.lower().strip() not in block_text.lower().strip():
         print(f"Текст '{search_text}' не найден в блоке:")
