@@ -91,7 +91,8 @@ def test_update_object_patch(created_object_id):
     response = requests.patch(base_url, json=data, headers=headers)
     json_data = response.json()
 
-    assert response.status_code == 200, f"Failed to update object (PATCH). Unexpected status code: {response.status_code}"
+    assert response.status_code == 200, (f"Failed to update object (PATCH). "
+                                         f"Unexpected status code: {response.status_code}")
     assert json_data['data']['attribute2'] == "patched_value2", "Patched attribute2 value does not match"
 
 
