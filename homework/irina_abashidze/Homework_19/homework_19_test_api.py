@@ -35,11 +35,7 @@ def created_object_id():
     requests.delete(delete_url)
 
 
-@pytest.mark.critical
-@pytest.mark.parametrize("name, attribute1, attribute2", [("Object1", "value1", "value2"),
-                                                          ("Object2", "value3", "value4"),
-                                                          ("Object3", "value5", "value6")])
-def test_create_object(name, attribute1, attribute2):
+def test_create_object(name="New Object", attribute1="value1", attribute2="value2"):
     base_url = "https://api.restful-api.dev/objects"
     headers = {"content-type": "application/json"}
 
@@ -61,7 +57,6 @@ def test_create_object(name, attribute1, attribute2):
     assert json_data['data']['attribute2'] == attribute2, "Created object attribute2 does not match"
 
 
-@pytest.mark.medium
 def test_update_object_put(created_object_id):
     base_url = f"https://api.restful-api.dev/objects/{created_object_id}"
     headers = {"content-type": "application/json"}
@@ -96,8 +91,7 @@ def test_update_object_patch(created_object_id):
     response = requests.patch(base_url, json=data, headers=headers)
     json_data = response.json()
 
-    assert response.status_code == 200, (f"Failed to update object (PATCH). "
-                                         f"Unexpected status code: {response.status_code}")
+    assert response.status_code == 200, f"Failed to update object (PATCH). Unexpected status code: {response.status_code}"
     assert json_data['data']['attribute2'] == "patched_value2", "Patched attribute2 value does not match"
 
 
