@@ -64,8 +64,9 @@ def test_create_object(name, attribute1, attribute2):
     print("after test")
 
     # Проверяем успешность создания объекта и соответствие его атрибутов ожидаемым значениям
-    assert response.status_code == 200, (f"Ошибка при создании объекта. "
-                                         f"Непредвиденный код состояния: {response.status_code}")
+    assert response.status_code == 200, (
+        f"Ошибка при создании объекта. Непредвиденный код состояния: {response.status_code}"
+    )
     assert 'id' in json_data, "Созданный объект не содержит ID"
     assert json_data['name'] == name, "Имя созданного объекта не совпадает"
     assert json_data['data']['attribute1'] == attribute1, "Атрибут attribute1 созданного объекта не совпадает"
@@ -95,8 +96,9 @@ def test_update_object_put(created_object_id):
     print("after test")
 
     # Проверяем успешность обновления объекта и соответствие его атрибутов ожидаемым значениям
-    assert response.status_code == 200, (f"Ошибка при обновлении объекта (PUT). "
-                                         f"Непредвиденный код состояния: {response.status_code}")
+    assert response.status_code == 200, (
+        f"Ошибка при обновлении объекта (PUT). Непредвиденный код состояния: {response.status_code}"
+    )
     assert json_data['name'] == "Updated Object", "Имя обновленного объекта не совпадает"
     assert json_data['data']['attribute1'] == "updated_value1", "Атрибут attribute1 обновленного объекта не совпадает"
     assert json_data['data']['attribute2'] == "updated_value2", "Атрибут attribute2 обновленного объекта не совпадает"
@@ -139,7 +141,8 @@ def test_delete_object(created_object_id):
     print("after test")
 
     # Проверяем успешность удаления объекта и пустой ли ответ при удалении
-    assert response.status_code == 200, (f"Ошибка при удалении объекта. "
-                                         f"Непредвиденный код состояния: {response.status_code}")
+    assert response.status_code == 200, (
+        f"Ошибка при удалении объекта. Непредвиденный код состояния: {response.status_code}"
+    )
     assert response.json() == {'message': f'Object with id = {created_object_id} has been deleted.'}, \
         "Некорректный ответ на удаление объекта"
