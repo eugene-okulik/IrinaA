@@ -71,22 +71,26 @@ def print_results(results, full_output=False):
         print("Результаты поиска:")
         for result in results:
             text = result['text']
-            # Находим индекс начала искомого текста
-            start_index = text.find(search_text)
-            # Выводим 150 символов перед искомым текстом
-            start_highlight = max(0, start_index - 150)
-            # Выводим 150 символов после искомого текста
-            end_highlight = min(len(text), start_index + len(search_text) + 150)
-            # Выделение цветом
-            highlighted_text = (
-                text[start_highlight:start_index]
-                + Fore.RED
-                + text[start_index:start_index + len(search_text)]
-                + Style.RESET_ALL
-                + text[start_index + len(search_text):end_highlight]
-            )
-            # Выводим результат с выделением цветом
-            print(f"Файл: {result['file']}, Строка: {result['line_number']}, Текст: {highlighted_text}")
+            # Проверяем, что text не None и search_text не None
+            if text is not None and search_text is not None:
+                # Находим индекс начала искомого текста
+                start_index = text.find(search_text)
+                # Выводим 150 символов перед искомым текстом
+                start_highlight = max(0, start_index - 150)
+                # Выводим 150 символов после искомого текста
+                end_highlight = min(len(text), start_index + len(search_text) + 150)
+                # Выделение цветом
+                highlighted_text = (
+                    text[start_highlight:start_index]
+                    + Fore.RED
+                    + text[start_index:start_index + len(search_text)]
+                    + Style.RESET_ALL
+                    + text[start_index + len(search_text):end_highlight]
+                )
+                # Выводим результат с выделением цветом
+                print(f"Файл: {result['file']}, Строка: {result['line_number']}, Текст: {highlighted_text}")
+            else:
+                print(f"Файл: {result['file']}, Строка: {result['line_number']}, Текст: {text}")
             if full_output:
                 print(text)
             print()
