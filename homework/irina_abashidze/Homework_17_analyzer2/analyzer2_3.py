@@ -116,12 +116,12 @@ if __name__ == "__main__":
     log_folder = args.log_folder
 
     if args.start_date is not None:
-        start_date = datetime.strptime(args.start_date, "%Y-%m-%d")
+        start_date = datetime.strptime(args.start_date, "%Y-%m-%d %H:%M:%S.%f")
     else:
         start_date = None
 
     if args.end_date is not None:
-        end_date = datetime.strptime(args.end_date, "%Y-%m-%d")
+        end_date = datetime.strptime(args.end_date, "%Y-%m-%d %H:%M:%S.%f")
     else:
         end_date = None
 
