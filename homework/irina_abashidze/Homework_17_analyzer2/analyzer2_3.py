@@ -63,6 +63,10 @@ def search_logs(log_folder, search_text, start_date, end_date, unwanted_text):
                 # Обрабатываем последний блок после выхода из цикла
                 process_log_block(file_path, current_block, results, search_text, start_date, end_date, unwanted_text)
 
+    if start_date or end_date:  # Проверяем, был ли указан поиск по дате
+        if not results:  # Если результаты пусты, выводим сообщение
+            print("С указанной датой ничего не найдено")
+
     return results
 
 
@@ -96,6 +100,9 @@ def print_results(results, full_output=False):
             print()
     else:
         print("Логи не содержат указанный текст.")
+
+    # Выводим количество найденных строк
+    print(f"Найдено строк: {len(results)}")
 
 
 if __name__ == "__main__":
