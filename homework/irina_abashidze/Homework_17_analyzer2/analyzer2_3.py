@@ -44,7 +44,8 @@ def process_log_block(file_path, block, results, search_text, start_date, end_da
 
 def search_logs(log_folder, search_text, start_date, end_date, unwanted_text):
     results = []
-    print(f"Ищем текст: '{search_text}'")
+    if search_text:
+        print(f"Ищем текст: '{search_text}'")  # Выводим сообщение только если есть текст для поиска
     for root, dirs, files in os.walk(log_folder):
         for file in files:
             file_path = os.path.join(root, file)
@@ -70,13 +71,12 @@ def search_logs(log_folder, search_text, start_date, end_date, unwanted_text):
     return results
 
 
-def print_results(results, full_output=False):
+def print_results(results, search_text, full_output=False):
     if results:
         print("Результаты поиска:")
         for result in results:
             text = result['text']
-            # Проверяем, что text не None и search_text не None
-            if text is not None and search_text is not None:
+            if search_text:  # Проверяем, был ли поиск по тексту
                 # Находим индекс начала искомого текста
                 start_index = text.find(search_text)
                 # Выводим 150 символов перед искомым текстом
@@ -99,7 +99,8 @@ def print_results(results, full_output=False):
                 print(text)
             print()
     else:
-        print("Логи не содержат указанный текст.")
+        if search_text:  # Выводим сообщение только если был поиск по тексту
+            print("Логи не содержат указанный текст.")
 
     # Выводим количество найденных строк
     print(f"Найдено строк: {len(results)}")
@@ -150,4 +151,4 @@ if __name__ == "__main__":
         print("The specified path does not exist.")
     else:
         results = search_logs(log_folder, search_text, start_date, end_date, unwanted_text)
-        print_results(results, args.full_output)
+        print_results(results, search_text, args.full_output)
