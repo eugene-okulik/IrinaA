@@ -33,4 +33,5 @@ class TestObjectsAPI:
 
     def test_delete_object(self, base_url, created_object_id):
         delete_object = DeleteObject(base_url)
-        response = delete_object.delete_object(created_object_id)
+        delete_object_response = delete_object.delete_object(created_object_id)
+        assert delete_object_response.status_code == 200
