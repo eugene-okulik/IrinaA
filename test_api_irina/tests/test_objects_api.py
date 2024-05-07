@@ -1,5 +1,4 @@
 import pytest
-from test_api_irina.endpoints.get_object import GetObject
 from test_api_irina.endpoints.post_object import PostObject
 from test_api_irina.endpoints.put_object import PutObject
 from test_api_irina.endpoints.patch_object import PatchObject
@@ -19,9 +18,9 @@ class TestObjectsAPI:
 
     def test_update_object_put(self, base_url, created_object_id):
         put_object = PutObject(base_url)
-        response = put_object.put_object(created_object_id,
-                                         {"name": "Updated Object", "data":
-                                             {"attribute1": "updated_value1", "attribute2": "updated_value2"}})
+        response = put_object.put_object(created_object_id, {"name": "Updated Object",
+                                                             "data": {"attribute1": "updated_value1",
+                                                                      "attribute2": "updated_value2"}})
         assert response["name"] == "Updated Object"
         assert response["data"]["attribute1"] == "updated_value1"
         assert response["data"]["attribute2"] == "updated_value2"
@@ -33,5 +32,5 @@ class TestObjectsAPI:
 
     def test_delete_object(self, base_url, created_object_id):
         delete_object = DeleteObject(base_url)
-        delete_object_response = delete_object.delete_object(created_object_id)
-        assert delete_object_response.status_code == 200
+        response = delete_object.delete_object(created_object_id)
+        assert response.status_code == 200

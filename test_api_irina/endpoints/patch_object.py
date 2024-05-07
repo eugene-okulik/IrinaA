@@ -1,12 +1,9 @@
-import requests
+from .base_endpoint import BaseEndpoint
 
 
-class PatchObject:
+class PatchObject(BaseEndpoint):
     def __init__(self, base_url):
-        self.base_url = base_url
+        super().__init__(base_url)
 
     def patch_object(self, object_id, data):
-        url = f"{self.base_url}/objects/{object_id}"
-        response = requests.patch(url, json=data)
-        assert response.status_code == 200, f"Failed to patch object. Status code: {response.status_code}"
-        return response.json()
+        return self.patch("objects", object_id, data)
