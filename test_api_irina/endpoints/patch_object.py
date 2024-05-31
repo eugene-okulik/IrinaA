@@ -2,10 +2,10 @@ from .base_endpoint import BaseEndpoint
 
 
 class PatchObject(BaseEndpoint):
-    def __init__(self, base_url):
-        super().__init__(base_url)
-
     def patch_object(self, object_id, data):
-        response = self.patch("objects", object_id, data)
-        assert response.status_code == 200, f"Failed to patch data. Status code: {response.status_code}"
-        return response.json()
+        self.response = self.patch("objects", object_id, data)
+        self.check_patched_data()
+
+    def check_patched_data(self):
+        response_json = self.response.json()
+        assert response_json["data"]["attribute2"] == "patched_value2", "attribute2 was not patched"
