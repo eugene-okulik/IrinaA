@@ -14,7 +14,8 @@ class ApiTasks(TaskSet):
         }
         response = self.client.post("/posts", json=payload)
         print(f"Create Post Response: {response.status_code}, {response.text}")
-        assert response.status_code == 201, f"Failed to create post. Status code: {response.status_code}"
+        assert response.status_code == 201, (f"Failed to create post. "
+                                             f"Status code: {response.status_code}")
         self.post_id = response.json()["id"]
         print(f"Created post with ID: {self.post_id}")
 
@@ -30,7 +31,8 @@ class ApiTasks(TaskSet):
         }
         response = self.client.put(f"/posts/{self.post_id}", json=payload)
         print(f"Update Post PUT Response: {response.status_code}, {response.text}")
-        assert response.status_code == 200, f"Failed to update post with PUT. Status code: {response.status_code}"
+        assert response.status_code == 200, (f"Failed to update post with PUT. "
+                                             f"Status code: {response.status_code}")
         assert response.json()["title"] == "updated title"
         assert response.json()["body"] == "updated body"
 
