@@ -3,7 +3,6 @@ from locust import HttpUser, TaskSet, task, between
 
 class UserBehavior(TaskSet):
 
-
     def on_start(self):
         response = self.client.post("/authorize", json={"name": "test_user"})
         self.token = response.json()["token"]
